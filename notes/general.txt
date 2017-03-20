@@ -1,0 +1,27 @@
+WEBPACK: takes modules -> stuffs into indiv functions -> stuffs these functions into an array -> calls different functions in an array
+
+MODULE LOADERS: pre-processing on files before adding to bundle.js. Can run on indiv files
+  --> babel: ES2015 code into ES5
+      1. babel-loader: teaches babel how to work with webpack
+      2. babel-core: takes in code, parses it, and generates output files
+      3. babel-preset-env: rules for telling babel what syntax to look for and how to turn it into ES5 code
+  --> css
+      1. css-loader: knows how to deal with CSS imports
+      2. style-loader: adds CSS imports to the HTML doc by adding a style tag to our HTML document
+  --> images
+      1. image-webpack-loader: compresses the image
+
+      2. url-loader: behaves differently depending on the size of the image.
+        --> inside bundle.js file as raw data
+        --> inlclude the raw image in the output directory
+      3. for larger images: add in output obj a pulblicPath: 'build/'
+
+*there was an error when trying to host images locally
+"Module build failed: Error: dyld: Library not loaded: /usr/local/opt/libpng/lib/libpng16.16.dylib"
+--> issue resolved by wrtiting in term: brew install libpng (brew link libpng)
+
+CODE SPLITTING:
+-code splitting: the ability to split up our bundle.js file into separate individual files and then programmatically to decide when to show which pieces of code
+-System.import: ES2015 function that takes a module as an arg, JS looks for the module on the server and imports it
+  ->if the module has dependents of it's own, they would be found too
+  -> returns a promise -> add a .then statement
